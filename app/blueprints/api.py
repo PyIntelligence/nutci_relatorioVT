@@ -97,3 +97,23 @@ def api_excluir(relatorio_id: int):
     db.session.delete(relatorio)
     db.session.commit()
     return jsonify({"ok": True}), 200
+
+
+@api_bp.route("/portal-info", methods=["GET"])
+def api_portal_info():
+    """Metadados públicos para integração automática no portal see3gre."""
+    base_url = request.host_url.rstrip("/")
+    return jsonify(
+        {
+            "nome": "Relatório de Visita Técnica",
+            "sigla": "NUTCI",
+            "orgao": "3ª Gerência Regional de Educação (SEE-PB)",
+            "descricao": "Registro e emissão de Relatórios de Visita Técnica",
+            "url": f"{base_url}/",
+            "icone_quadrado": f"{base_url}/static/img/icon-512.png",
+            "icone_pequeno": f"{base_url}/static/img/icon-192.png",
+            "banner_retangular": f"{base_url}/static/img/botao_see3gre.png",
+            "cor_primaria": "#0a2e5c",
+            "cor_destaque": "#00b4d8",
+        }
+    ), 200

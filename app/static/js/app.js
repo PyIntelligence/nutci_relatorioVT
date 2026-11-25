@@ -142,6 +142,30 @@
       });
     }
 
+
+    // Alterna visualmente o ( X ) apenas na opção marcada (SIM ou NÃO)
+    const radioSim = document.getElementById("radio_sim");
+    const radioNao = document.getElementById("radio_nao");
+    const markSim = document.getElementById("mark_sim");
+    const markNao = document.getElementById("mark_nao");
+
+    function updateResolvedMarks() {
+      if (!radioSim || !radioNao || !markSim || !markNao) return;
+      if (radioSim.checked) {
+        markSim.textContent = "X";
+        markNao.textContent = "  ";
+      } else {
+        markSim.textContent = "  ";
+        markNao.textContent = "X";
+      }
+    }
+
+    if (radioSim && radioNao) {
+      updateResolvedMarks();
+      radioSim.addEventListener("change", updateResolvedMarks);
+      radioNao.addEventListener("change", updateResolvedMarks);
+    }
+
     // Submissão do formulário
     const form = document.getElementById("relatorio-form");
     if (form) {
