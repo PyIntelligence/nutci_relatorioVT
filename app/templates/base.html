@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a2e5c" />
+  <meta name="description" content="NUTCI - Relatório de Visita Técnica - 3ª Gerência Regional de Educação (SEE-PB)" />
+  <title>{% block title %}NUTCI - Relatório de Visita Técnica{% endblock %}</title>
+
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon-192.png') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/icon-192.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+  <header class="topbar no-print">
+    <div class="topbar-inner">
+      <a href="{{ url_for('web.index') }}" class="brand">
+        <img src="{{ url_for('static', filename='img/logo_nutci.png') }}" alt="NUTCI" />
+        <div>
+          <strong>NUTCI &bull; 3ª GRE</strong>
+          <span>Relatório de Visita Técnica</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="{{ url_for('web.index') }}" class="nav-btn {% if request.endpoint == 'web.index' %}active{% endif %}">
+          Novo Relatório
+        </a>
+        <a href="{{ url_for('web.historico') }}" class="nav-btn {% if request.endpoint == 'web.historico' %}active{% endif %}">
+          Histórico
+        </a>
+        <a href="{{ url_for('web.visualizar_em_branco') }}" class="nav-btn {% if request.endpoint == 'web.visualizar_em_branco' %}active{% endif %}">
+          Modelo em Branco
+        </a>
+        <a href="{{ url_for('web.integracao_portal') }}" class="nav-btn {% if request.endpoint == 'web.integracao_portal' %}active{% endif %}">
+          Botão Portal see3gre
+        </a>
+      </nav>
+
+      <div class="status-group">
+        <span id="network-badge" class="badge badge-online" title="Status da conexão">
+          <span class="dot"></span> <span id="network-text">Online</span>
+        </span>
+        <button id="sync-btn" type="button" class="btn-sync hidden" title="Sincronizar relatórios salvos offline">
+          Sincronizar (<span id="pending-count">0</span>)
+        </button>
+        <button id="install-pwa-btn" type="button" class="btn-install hidden">
+          Instalar App
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div id="toast-container" class="toast-container no-print"></div>
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="{{ url_for('static', filename='js/offline-sync.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

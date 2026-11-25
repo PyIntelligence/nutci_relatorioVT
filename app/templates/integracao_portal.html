@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Integração com Portal see3gre - NUTCI{% endblock %}
+
+{% block content %}
+<div class="history-container">
+  <div class="history-header">
+    <div>
+      <h1>Botão e Ícones Prontos para o App <code>see3gre</code></h1>
+      <p>Use qualquer uma das opções abaixo para adicionar este sistema ao portal unificado da 3ª GRE sem precisar recortar ou ajustar imagens manualmente.</p>
+    </div>
+  </div>
+
+  <div class="portal-cards-grid">
+    <div class="portal-preview-card">
+      <h3>1. Banner / Botão Retangular (PNG &amp; SVG)</h3>
+      <p>Ideal para portais que pedem o upload de uma imagem de botão:</p>
+      <img src="{{ url_for('static', filename='img/botao_see3gre.png') }}" alt="Botão NUTCI Relatório de Visita Técnica" class="portal-img-sample" />
+      <div class="portal-downloads">
+        <a href="{{ url_for('static', filename='img/botao_see3gre.png') }}" download="botao_nutci_see3gre.png" class="btn btn-primary btn-sm">
+          Baixar PNG (420x180)
+        </a>
+        <a href="{{ url_for('static', filename='img/botao_see3gre.svg') }}" download="botao_nutci_see3gre.svg" class="btn btn-secondary btn-sm">
+          Baixar SVG Vetorial
+        </a>
+      </div>
+    </div>
+
+    <div class="portal-preview-card">
+      <h3>2. Ícone Quadrado (192x192 / 512x512)</h3>
+      <p>Ideal para grades de aplicativos estilo celular / launcher:</p>
+      <img src="{{ url_for('static', filename='img/icon-192.png') }}" alt="Ícone Quadrado NUTCI" class="portal-icon-sample" />
+      <div class="portal-downloads">
+        <a href="{{ url_for('static', filename='img/icon-192.png') }}" download="icone_nutci_192.png" class="btn btn-primary btn-sm">
+          Baixar Ícone 192x192
+        </a>
+        <a href="{{ url_for('static', filename='img/icon-512.png') }}" download="icone_nutci_512.png" class="btn btn-secondary btn-sm">
+          Baixar Ícone 512x512
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="portal-code-box">
+    <h3>3. Código HTML/CSS pronto (sem precisar de arquivo de imagem)</h3>
+    <p>Se você tiver acesso ao código do portal <strong>see3gre</strong>, cole este trecho HTML/CSS no lugar do botão — ele já puxa o ícone direto do Render.com e escala em qualquer tela:</p>
+    <pre><code>&lt;a href="https://SEU-APP-NUTCI.onrender.com" target="_blank" rel="noopener"
+   style="display:inline-flex;align-items:center;gap:14px;background:#0a2e5c;color:#fff;
+          padding:14px 20px;border-radius:14px;text-decoration:none;
+          font-family:'Segoe UI',Arial,sans-serif;border-left:6px solid #00b4d8;
+          box-shadow:0 6px 16px rgba(10,46,92,0.18);"&gt;
+  &lt;img src="https://SEU-APP-NUTCI.onrender.com/static/img/icon-192.png"
+       alt="NUTCI" style="width:52px;height:52px;border-radius:10px;background:#fff;padding:3px;" /&gt;
+  &lt;span style="display:flex;flex-direction:column;line-height:1.25;"&gt;
+    &lt;small style="color:#7dd3fc;font-weight:700;font-size:11px;letter-spacing:.5px;"&gt;NUTCI &bull; 3ª GRE&lt;/small&gt;
+    &lt;strong style="font-size:16px;font-weight:800;"&gt;Relatório de Visita Técnica&lt;/strong&gt;
+    &lt;span style="font-size:12px;color:#cbd5e1;"&gt;Suporte e Infraestrutura de TI&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/a&gt;</code></pre>
+  </div>
+</div>
+{% endblock %}

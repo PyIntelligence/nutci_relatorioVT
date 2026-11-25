@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if em_branco %}
+    Modelo em Branco - Relatório de Visita Técnica NUTCI
+  {% else %}
+    Relatório {{ relatorio.protocolo }} - {{ relatorio.escola_setor }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="print-toolbar no-print">
+  <a href="{{ url_for('web.historico') }}" class="btn btn-secondary">&larr; Voltar ao Histórico</a>
+
+  <div class="print-toolbar-right">
+    {% if not em_branco %}
+      <span class="protocol-pill">Protocolo: <strong>{{ relatorio.protocolo }}</strong></span>
+      <a href="https://assinador.iti.br/" target="_blank" rel="noopener noreferrer" class="btn btn-govbr"
+         title="Abre o Assinador Eletrônico gratuito do Gov.br após salvar o PDF">
+        Assinar no Gov.br &#8599;
+      </a>
+    {% endif %}
+    <button type="button" id="btn-gerar-pdf" onclick="window.print()" class="btn btn-primary">
+      Gerar PDF / Imprimir (A4)
+    </button>
+  </div>
+</div>
+
+{% if not em_branco %}
+<div class="govbr-guide no-print">
+  <div>
+    <strong>Passo a passo rápido (PDF, E-mail, Gov.br ou Papel):</strong>
+    <ol>
+      <li>Clique em <strong>Gerar PDF / Imprimir (A4)</strong> e escolha <em>"Salvar como PDF"</em> (para enviar por e-mail ou assinar no Gov.br) ou selecione a impressora (para assinar no papel).</li>
+      <li>Para assinatura eletrônica oficial, clique em <strong>Assinar no Gov.br</strong>, envie o PDF salvo e entre com sua conta <strong>gov.br</strong> (Prata ou Ouro).</li>
+    </ol>
+  </div>
+  <a id="btn-enviar-email"
+     href="mailto:?subject=Relat%C3%B3rio%20de%20Visita%20T%C3%A9cnica%20NUTCI%20-%20{{ relatorio.protocolo }}&body=Ol%C3%A1%2C%0A%0ASegue%20em%20anexo%20o%20Relat%C3%B3rio%20de%20Visita%20T%C3%A9cnica%20(Protocolo%20{{ relatorio.protocolo }})%20referente%20%C3%A0%20unidade%20{{ relatorio.escola_setor }}%2C%20realizada%20em%20{{ relatorio.data_visita_br }}%20pelo%20t%C3%A9cnico%20{{ relatorio.tecnico }}.%0A%0AAtenciosamente%2C%0ANUTCI%20-%203%C2%AA%20Ger%C3%AAncia%20Regional%20de%20Educa%C3%A7%C3%A3o"
+     class="btn btn-secondary btn-sm">
+    Preparar E-mail &#9993;
+  </a>
+</div>
+{% endif %}
+
+<div class="sheet-wrapper">
+  <article class="doc-sheet doc-sheet-print">
+    <!-- Cabeçalho idêntico ao Word -->
+    <div class="doc-header">
+      <div class="doc-header-left">
+        <img src="{{ url_for('static', filename='img/logo_nutci.png') }}" alt="Logo NUTCI" class="logo-nutci" />
+        <div class="header-org-text">
+          <p class="gre-title">3ª Gerência Regional de Educação</p>
+          <p class="nutci-subtitle">Núcleo de Infraestrutura e Suporte de Tecnologia da Informação</p>
+          <p class="gre-motto">Compromisso com a Educação</p>
+        </div>
+      </div>
+
+      <div class="doc-header-right">
+        <img src="{{ url_for('static', filename='img/brasao_pb.png') }}" alt="Brasão da Paraíba" class="brasao-pb" />
+        <div class="see-title">
+          <span>SECRETARIA DE ESTADO</span>
+          <span>DA EDUCAÇÃO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <div class="title-block">
+      <h1 class="doc-main-title">RELATÓRIO DE VISITA TÉCNICA</h1>
+      {% if not em_branco %}
+        <div class="doc-protocol-line">Registro Nº {{ relatorio.protocolo }}</div>
+      {% endif %}
+    </div>
+
+    <div class="doc-print-fields">
+      <div class="print-line">
+        <strong>Escola/Setor:</strong>
+        <span>{{ relatorio.escola_setor if not em_branco else '' }}</span>
+      </div>
+
+      <div class="print-line">
+        <strong>Data da visita:</strong>
+        <span>{{ relatorio.data_visita_br if not em_branco else '' }}</span>
+      </div>
+
+      <div class="print-line">
+        <strong>Endereço:</strong>
+        <span>{{ relatorio.endereco if not em_branco else '' }}</span>
+      </div>
+
+      <div class="print-line">
+        <strong>Motivo do chamado:</strong>
+        <span>{{ relatorio.motivo_chamado if not em_branco else '' }}</span>
+      </div>
+
+      <div class="print-line">
+        <strong>Técnico:</strong>
+        <span>{{ relatorio.tecnico if not em_branco else '' }}</span>
+      </div>
+
+      <div class="print-line">
+        <strong>Matrícula:</strong>
+        <span>{{ relatorio.matricula if not em_branco else '' }}</span>
+      </div>
+
+      <div class="print-checkbox-line">
+        <span>Problema da instituição foi resolvido</span>
+        {% if em_branco %}
+          <span>SIM ( &nbsp;&nbsp; ) &nbsp;&nbsp; NÃO ( &nbsp;&nbsp; )</span>
+        {% else %}
+          <span>
+            SIM ( <strong>{{ 'X' if relatorio.problema_resolvido else '  ' }}</strong> )
+            &nbsp;&nbsp;
+            NÃO ( <strong>{{ 'X' if not relatorio.problema_resolvido else '  ' }}</strong> )
+          </span>
+        {% endif %}
+      </div>
+
+      <div class="print-description-block">
+        <p class="desc-heading">Descrição do atendimento:</p>
+        {% if em_branco %}
+          <div class="ruled-lines-blank">
+            {% for _ in range(11) %}
+              <div class="ruled-line"></div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="ruled-text-content">{{ relatorio.descricao_atendimento }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <p class="doc-date-line">
+      {% if em_branco %}
+        Campina Grande - PB, ______ de ___________________ de _______.
+      {% else %}
+        {{ relatorio.data_extenso_documento }}
+      {% endif %}
+    </p>
+
+    <!-- Assinaturas lado a lado com nome impresso abaixo da linha -->
+    <div class="signatures-grid signatures-print">
+      <div class="signature-box">
+        <div class="signature-space"></div>
+        <div class="signature-line"></div>
+        <p class="signature-label">Assinatura do Técnico</p>
+        {% if not em_branco %}
+          <p class="signature-person-name">{{ relatorio.tecnico }}</p>
+          <p class="signature-person-sub">Matrícula: {{ relatorio.matricula }}</p>
+        {% endif %}
+      </div>
+
+      <div class="signature-box">
+        <div class="signature-space"></div>
+        <div class="signature-line"></div>
+        <p class="signature-label">Assinatura do Gestor/Responsável</p>
+        {% if not em_branco and relatorio.gestor_nome %}
+          <p class="signature-person-name">{{ relatorio.gestor_nome }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <footer class="doc-footer">
+      <div class="doc-footer-info">
+        <span>&#9742; (83) 3342-2537</span>
+        <span>&#9993; 3gre@see.pb.gov.br</span>
+        <span>&#9873; Rua Nivaldo Henrique de Oliveira, S/N, Bairro Malvinas</span>
+      </div>
+      <img src="{{ url_for('static', filename='img/governo_pb.png') }}" alt="Governo da Paraíba" class="governo-pb-logo" />
+    </footer>
+  </article>
+</div>
+{% endblock %}

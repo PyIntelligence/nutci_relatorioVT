@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico de Visitas Técnicas - NUTCI{% endblock %}
+
+{% block content %}
+<div class="history-container">
+  <div class="history-header">
+    <div>
+      <h1>Relatórios de Visita Técnica</h1>
+      <p>Registros armazenados no PostgreSQL (Neon.tech) &bull; Total: <strong>{{ paginacao.total }}</strong></p>
+    </div>
+    <a href="{{ url_for('web.index') }}" class="btn btn-primary">+ Novo Relatório</a>
+  </div>
+
+  <div id="offline-queue-panel" class="offline-panel hidden">
+    <div>
+      <strong>Relatórios aguardando sincronização no dispositivo:</strong>
+      <span id="offline-queue-summary">0 itens</span>
+    </div>
+    <button type="button" id="btn-force-sync" class="btn btn-primary btn-sm">Enviar para Neon.tech agora</button>
+  </div>
+
+  <form method="get" action="{{ url_for('web.historico') }}" class="filter-bar">
+    <input type="text" name="q" value="{{ busca }}" placeholder="Buscar por escola, técnico (Guega, Jairo, João Paulo, Valdênio, Isaque), matrícula ou protocolo..." />
+    <select name="status">
+      <option value="" {% if not status %}selected{% endif %}>Todos os status</option>
+      <option value="sim" {% if status == 'sim' %}selected{% endif %}>Problema Resolvido (SIM)</option>
+      <option value="nao" {% if status == 'nao' %}selected{% endif %}>Pendente (NÃO)</option>
+    </select>
+    <button type="submit" class="btn btn-secondary">Filtrar</button>
+    {% if busca or status %}
+      <a href="{{ url_for('web.historico') }}" class="btn btn-link">Limpar</a>
+    {% endif %}
+  </form>
+
+  {% if paginacao.items %}
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Protocolo</th>
+            <th>Data</th>
+            <th>Escola / Setor</th>
+            <th>Motivo do Chamado</th>
+            <th>Técnico (Matrícula)</th>
+            <th>Resolvido</th>
+            <th class="text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in paginacao.items %}
+          <tr id="row-{{ item.id }}">
+            <td><strong>{{ item.protocolo }}</strong></td>
+            <td>{{ item.data_visita_br }}</td>
+            <td>{{ item.escola_setor }}</td>
+            <td>{{ item.motivo_chamado }}</td>
+            <td><strong>{{ item.tecnico }}</strong> <small>({{ item.matricula }})</small></td>
+            <td>
+              {% if item.problema_resolvido %}
+                <span class="status-pill status-sim">SIM</span>
+              {% else %}
+                <span class="status-pill status-nao">NÃO</span>
+              {% endif %}
+            </td>
+            <td class="text-right actions-cell">
+              <a href="{{ url_for('web.visualizar', relatorio_id=item.id) }}" class="btn btn-sm btn-primary">
+                PDF / Imprimir
+              </a>
+              <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ item.id }}" data-protocolo="{{ item.protocolo }}">
+                Excluir
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if paginacao.pages > 1 %}
+      <div class="pagination">
+        {% if paginacao.has_prev %}
+          <a href="{{ url_for('web.historico', page=paginacao.prev_num, q=busca, status=status) }}" class="btn btn-sm btn-secondary">&laquo; Anterior</a>
+        {% endif %}
+        <span>Página {{ paginacao.page }} de {{ paginacao.pages }}</span>
+        {% if paginacao.has_next %}
+          <a href="{{ url_for('web.historico', page=paginacao.next_num, q=busca, status=status) }}" class="btn btn-sm btn-secondary">Próxima &raquo;</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="empty-state">
+      <p>Nenhum relatório encontrado.</p>
+      <a href="{{ url_for('web.index') }}" class="btn btn-primary">Preencher Primeiro Relatório</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

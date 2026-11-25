@@ -1,0 +1,26 @@
+{
+  "name": "NUTCI - Relatório de Visita Técnica (3ª GRE)",
+  "short_name": "NUTCI Visitas",
+  "description": "Sistema PWA para registro e emissão de Relatórios de Visita Técnica - 3ª Gerência Regional de Educação (SEE-PB).",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef2f6",
+  "theme_color": "#0a2e5c",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/static/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

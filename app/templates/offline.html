@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Modo Offline - NUTCI{% endblock %}
+
+{% block content %}
+<div class="empty-state">
+  <h2>Você está sem conexão com a internet</h2>
+  <p>O aplicativo NUTCI funciona em modo offline. Você pode abrir o formulário e registrar sua visita técnica; os dados serão sincronizados automaticamente com o banco Neon.tech quando o sinal retornar.</p>
+  <a href="{{ url_for('web.index') }}" class="btn btn-primary">Ir para o Formulário de Visita</a>
+</div>
+{% endblock %}

@@ -1,0 +1,947 @@
+/* ==========================================================================
+   NUTCI - 3ª Gerência Regional de Educação (SEE-PB)
+   Identidade visual institucional + folha A4 fiel ao documento Word
+   ========================================================================== */
+
+:root {
+  --navy: #0a2e5c;
+  --navy-dark: #061d3b;
+  --cyan: #00b4d8;
+  --gov-blue: #1351b4;
+  --bg-page: #eef2f6;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --border-color: #cbd5e1;
+  --paper-shadow: 0 10px 30px rgba(10, 46, 92, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.45;
+}
+
+/* Barra superior PWA */
+.topbar {
+  background: var(--navy);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.topbar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0.65rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.brand img {
+  height: 38px;
+  width: auto;
+  background: #ffffff;
+  padding: 3px 5px;
+  border-radius: 6px;
+}
+
+.brand strong {
+  display: block;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.brand span {
+  display: block;
+  font-size: 0.75rem;
+  color: #bae6fd;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 0.42rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.nav-btn.active {
+  background: var(--cyan);
+  color: var(--navy-dark);
+}
+
+.status-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.badge-online {
+  background: rgba(16, 185, 129, 0.18);
+  color: #a7f3d0;
+}
+
+.badge-online .dot {
+  background: #10b981;
+}
+
+.badge-offline {
+  background: rgba(245, 158, 11, 0.22);
+  color: #fde68a;
+}
+
+.badge-offline .dot {
+  background: #f59e0b;
+}
+
+.btn-sync,
+.btn-install {
+  border: none;
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-sync {
+  background: #f59e0b;
+  color: #111827;
+}
+
+.btn-install {
+  background: #ffffff;
+  color: var(--navy);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Container e Toasts */
+.main-container {
+  max-width: 1140px;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1rem;
+}
+
+.toast-container {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background: var(--navy-dark);
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border-left: 4px solid var(--cyan);
+}
+
+.toast.error {
+  border-left-color: #ef4444;
+}
+
+.toast.success {
+  border-left-color: #10b981;
+}
+
+/* ==========================================================================
+   Folha Oficial do Documento (Fiel ao Relatorio visita técnica novo.docx)
+   ========================================================================== */
+.sheet-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.doc-sheet {
+  width: 100%;
+  max-width: 210mm;
+  min-height: 297mm;
+  background: #ffffff;
+  padding: 16mm 18mm 14mm;
+  box-shadow: var(--paper-shadow);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.doc-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.logo-nutci {
+  width: 82px;
+  height: auto;
+  object-fit: contain;
+}
+
+.header-org-text p {
+  margin: 0;
+}
+
+.gre-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.nutci-subtitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-top: 2px !important;
+}
+
+.gre-motto {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 2px !important;
+}
+
+.doc-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 155px;
+}
+
+.brasao-pb {
+  width: 58px;
+  height: auto;
+  margin-bottom: 4px;
+}
+
+.see-title {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.doc-divider {
+  height: 2px;
+  background: linear-gradient(90deg, var(--navy) 0%, var(--cyan) 100%);
+  margin: 0.75rem 0 1rem;
+}
+
+.title-block {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.doc-main-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #000000;
+  margin: 0.25rem 0 1rem;
+  text-transform: uppercase;
+}
+
+.title-block .doc-main-title {
+  margin-bottom: 0.2rem;
+}
+
+.doc-protocol-line {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* Campos do Formulário Interativo */
+.doc-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.field-row label {
+  font-weight: 700;
+  font-size: 0.94rem;
+  white-space: nowrap;
+  color: #000000;
+}
+
+.field-row input[type="text"],
+.field-row input[type="date"],
+.doc-select {
+  flex: 1;
+  border: none;
+  border-bottom: 1.5px solid #475569;
+  padding: 0.34rem 0.45rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #f8fafc;
+  border-radius: 3px 3px 0 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.field-row input:focus,
+.field-row textarea:focus,
+.doc-select:focus {
+  outline: none;
+  border-bottom-color: var(--navy);
+  background: #eff6ff;
+}
+
+.field-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field-col {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-row {
+  margin-top: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.checkbox-question {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.checkbox-options {
+  display: flex;
+  gap: 1.25rem;
+  margin-left: 0.75rem;
+}
+
+.doc-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.field-row-column {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+}
+
+.field-row-column textarea {
+  width: 100%;
+  border: 1px solid #94a3b8;
+  border-radius: 4px;
+  padding: 0.65rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  resize: vertical;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #ffffff 0px,
+    #ffffff 25px,
+    #cbd5e1 26px
+  );
+}
+
+/* Seletor de Modalidade de Assinatura (Gov.br vs Papel) */
+.sign-mode-box {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sign-mode-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.sign-mode-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.88rem;
+}
+
+/* Campos na Visualização / Impressão A4 */
+.doc-print-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  font-size: 0.98rem;
+}
+
+.print-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 3px;
+  min-height: 24px;
+}
+
+.print-line strong {
+  white-space: nowrap;
+  color: #000000;
+}
+
+.print-line span {
+  flex: 1;
+  color: #000000;
+}
+
+.print-checkbox-line {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0.45rem 0;
+  font-weight: 700;
+}
+
+.print-description-block {
+  margin-top: 0.25rem;
+}
+
+.desc-heading {
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.ruled-lines-blank .ruled-line {
+  height: 25px;
+  border-bottom: 1px solid #334155;
+}
+
+.ruled-text-content {
+  min-height: 230px;
+  white-space: pre-wrap;
+  line-height: 26px;
+  font-size: 0.96rem;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 25px,
+    #334155 26px
+  );
+  padding: 0 2px;
+}
+
+/* Data por extenso e Assinaturas */
+.doc-date-line {
+  text-align: center;
+  margin: 1.35rem 0 1.25rem;
+  font-size: 0.96rem;
+}
+
+.signatures-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 0.75rem;
+}
+
+.signature-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature-space {
+  height: 46px;
+}
+
+.signature-line {
+  width: 90%;
+  border-top: 1.5px solid #000000;
+}
+
+.signature-label {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+  color: #000000;
+}
+
+.signature-person-name {
+  margin: 0.15rem 0 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: center;
+}
+
+.signature-person-sub {
+  margin: 0.05rem 0 0;
+  font-size: 0.78rem;
+  color: #475569;
+  text-align: center;
+}
+
+/* Rodapé Oficial */
+.doc-footer {
+  margin-top: 1.5rem;
+  padding-top: 0.65rem;
+  border-top: 1.5px solid var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.76rem;
+  color: #1e293b;
+}
+
+.doc-footer-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  font-weight: 600;
+}
+
+.governo-pb-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Botões e Barra de Impressão/Gov.br */
+.form-actions {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn:hover {
+  opacity: 0.93;
+}
+
+.btn-sm {
+  padding: 0.38rem 0.72rem;
+  font-size: 0.82rem;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.btn-govbr {
+  background: var(--gov-blue);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-link {
+  background: transparent;
+  color: var(--navy);
+  text-decoration: underline;
+}
+
+.print-toolbar {
+  max-width: 210mm;
+  margin: 0 auto 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.print-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.protocol-pill {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+}
+
+.govbr-guide {
+  max-width: 210mm;
+  margin: 0 auto 1rem;
+  background: #ffffff;
+  border-left: 4px solid var(--gov-blue);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.govbr-guide ol {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+}
+
+/* Tela de Histórico e Integração Portal */
+.history-container {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: var(--paper-shadow);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.history-header h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--navy);
+}
+
+.history-header p {
+  margin: 0.2rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.portal-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.portal-preview-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.15rem;
+  background: #f8fafc;
+}
+
+.portal-preview-card h3 {
+  margin: 0 0 0.35rem;
+  color: var(--navy);
+  font-size: 1rem;
+}
+
+.portal-img-sample {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 0.75rem 0;
+  display: block;
+}
+
+.portal-icon-sample {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  margin: 0.75rem 0;
+  display: block;
+}
+
+.portal-downloads {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.portal-code-box {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 1.15rem;
+  background: #f8fafc;
+}
+
+.portal-code-box pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 0.9rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.82rem;
+}
+
+.offline-panel {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.filter-bar input {
+  flex: 1;
+  min-width: 220px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 0.65rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.data-table th {
+  background: #f8fafc;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.actions-cell {
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.status-sim {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-nao {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.pagination {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-state {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--paper-shadow);
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+  .doc-sheet {
+    padding: 1.15rem;
+    min-height: auto;
+  }
+
+  .doc-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doc-header-right {
+    flex-direction: row;
+    text-align: left;
+    gap: 0.65rem;
+  }
+
+  .field-row-split,
+  .signatures-grid,
+  .portal-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Modo de Impressão / Salvar PDF em Folha A4 (Fiel ao Word)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    margin: 0 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .main-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .doc-sheet {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 275mm !important;
+    padding: 6mm 8mm !important;
+  }
+
+  .signatures-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}

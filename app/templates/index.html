@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Relatório de Visita Técnica - NUTCI{% endblock %}
+
+{% block content %}
+<div class="sheet-wrapper">
+  <form id="relatorio-form" class="doc-sheet" novalidate>
+    <!-- Cabeçalho idêntico ao documento Word -->
+    <div class="doc-header">
+      <div class="doc-header-left">
+        <img src="{{ url_for('static', filename='img/logo_nutci.png') }}" alt="Logo NUTCI" class="logo-nutci" />
+        <div class="header-org-text">
+          <p class="gre-title">3ª Gerência Regional de Educação</p>
+          <p class="nutci-subtitle">Núcleo de Infraestrutura e Suporte de Tecnologia da Informação</p>
+          <p class="gre-motto">Compromisso com a Educação</p>
+        </div>
+      </div>
+
+      <div class="doc-header-right">
+        <img src="{{ url_for('static', filename='img/brasao_pb.png') }}" alt="Brasão da Paraíba" class="brasao-pb" />
+        <div class="see-title">
+          <span>SECRETARIA DE ESTADO</span>
+          <span>DA EDUCAÇÃO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <h1 class="doc-main-title">RELATÓRIO DE VISITA TÉCNICA</h1>
+
+    <!-- Campos oficiais -->
+    <div class="doc-fields">
+      <div class="field-row">
+        <label for="escola_setor">Escola/Setor:</label>
+        <input type="text" id="escola_setor" name="escola_setor" required placeholder="Ex.: EEEFM Prof. Raul Córdula / Secretaria" />
+      </div>
+
+      <div class="field-row field-row-split">
+        <div class="field-col">
+          <label for="data_visita">Data da visita:</label>
+          <input type="date" id="data_visita" name="data_visita" value="{{ hoje }}" required />
+        </div>
+        <div class="field-col">
+          <label for="cidade">Município/UF:</label>
+          <input type="text" id="cidade" name="cidade" value="Campina Grande - PB" required />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required placeholder="Rua, número, bairro, município" />
+      </div>
+
+      <div class="field-row">
+        <label for="motivo_chamado">Motivo do chamado:</label>
+        <input type="text" id="motivo_chamado" name="motivo_chamado" required placeholder="Ex.: Manutenção de rede, laboratório de informática, configuração de equipamentos..." />
+      </div>
+
+      <!-- Seleção rápida dos técnicos da equipe NUTCI + opção Outro -->
+      <div class="field-row field-row-split">
+        <div class="field-col">
+          <label for="tecnico_select">Técnico:</label>
+          <select id="tecnico_select" class="doc-select" required>
+            {% for t in tecnicos %}
+              <option value="{{ t.nome }}" data-matricula="{{ t.matricula }}">{{ t.nome }}</option>
+            {% endfor %}
+            <option value="__outro__">Outro técnico...</option>
+          </select>
+          <input type="text" id="tecnico_custom" class="hidden" placeholder="Digite o nome do técnico" />
+          <input type="hidden" id="tecnico" name="tecnico" value="{{ tecnicos[0].nome }}" />
+        </div>
+
+        <div class="field-col">
+          <label for="matricula">Matrícula:</label>
+          <input type="text" id="matricula" name="matricula" required placeholder="Nº de matrícula" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="gestor_nome">Gestor/Responsável:</label>
+        <input type="text" id="gestor_nome" name="gestor_nome" placeholder="Nome do Gestor(a) ou Responsável pela unidade (opcional)" />
+      </div>
+
+      <div class="field-row checkbox-row">
+        <span class="checkbox-question">Problema da instituição foi resolvido</span>
+        <div class="checkbox-options">
+          <label class="doc-check">
+            <input type="radio" name="problema_resolvido" value="true" checked />
+            <span>SIM ( <strong>X</strong> )</span>
+          </label>
+          <label class="doc-check">
+            <input type="radio" name="problema_resolvido" value="false" />
+            <span>NÃO ( <strong>X</strong> )</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field-row field-row-column">
+        <label for="descricao_atendimento">Descrição do atendimento:</label>
+        <textarea id="descricao_atendimento" name="descricao_atendimento" rows="9" required
+          placeholder="Descreva detalhadamente os procedimentos realizados, diagnósticos, equipamentos verificados e orientações deixadas na unidade..."></textarea>
+      </div>
+    </div>
+
+    <!-- Data por extenso no padrão do documento -->
+    <p id="preview-data-extenso" class="doc-date-line">
+      Campina Grande - PB, ______ de ___________________ de _______.
+    </p>
+
+    <!-- Prévia da linha de assinaturas com o nome do Técnico selecionado -->
+    <div class="signatures-grid">
+      <div class="signature-box">
+        <div class="signature-line"></div>
+        <p class="signature-label">Assinatura do Técnico</p>
+        <p id="preview-nome-tecnico" class="signature-person-name">{{ tecnicos[0].nome }}</p>
+      </div>
+
+      <div class="signature-box">
+        <div class="signature-line"></div>
+        <p class="signature-label">Assinatura do Gestor/Responsável</p>
+        <p id="preview-nome-gestor" class="signature-person-name">&nbsp;</p>
+      </div>
+    </div>
+
+    <!-- Modalidade de assinatura (Gov.br ou Impressão Física) -->
+    <div class="sign-mode-box no-print">
+      <span class="sign-mode-title">Como o documento será assinado?</span>
+      <div class="sign-mode-options">
+        <label class="doc-check">
+          <input type="radio" name="tipo_assinatura" value="govbr" checked />
+          <span>Gerar PDF para assinatura eletrônica <strong>Gov.br</strong></span>
+        </label>
+        <label class="doc-check">
+          <input type="radio" name="tipo_assinatura" value="impressa" />
+          <span>Imprimir para <strong>assinatura física</strong> no papel</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Rodapé oficial -->
+    <footer class="doc-footer">
+      <div class="doc-footer-info">
+        <span>&#9742; (83) 3342-2537</span>
+        <span>&#9993; 3gre@see.pb.gov.br</span>
+        <span>&#9873; Rua Nivaldo Henrique de Oliveira, S/N, Bairro Malvinas</span>
+      </div>
+      <img src="{{ url_for('static', filename='img/governo_pb.png') }}" alt="Governo da Paraíba" class="governo-pb-logo" />
+    </footer>
+
+    <!-- Barra de ações -->
+    <div class="form-actions no-print">
+      <button type="reset" id="btn-limpar-form" class="btn btn-secondary">Limpar Campos</button>
+      <button type="submit" id="btn-salvar" class="btn btn-primary">
+        Salvar e Preparar PDF / Impressão
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" width="400" height="180">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2e5c"/>
+      <stop offset="100%" stop-color="#0f3d7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="180" rx="16" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="10" height="180" rx="4" fill="#00b4d8"/>
+  <rect x="26" y="34" width="112" height="112" rx="14" fill="#ffffff"/>
+  <text x="82" y="84" font-family="Segoe UI, Arial, sans-serif" font-weight="900" font-size="34" fill="#00b4d8" text-anchor="middle">NU</text>
+  <text x="82" y="122" font-family="Segoe UI, Arial, sans-serif" font-weight="900" font-size="34" fill="#0a2e5c" text-anchor="middle">TCI</text>
+  <text x="158" y="68" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="13" fill="#7dd3fc" letter-spacing="1">3ª GERÊNCIA REGIONAL DE EDUCAÇÃO</text>
+  <text x="158" y="98" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="22" fill="#ffffff">Relatório de</text>
+  <text x="158" y="125" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="22" fill="#ffffff">Visita Técnica</text>
+  <text x="158" y="150" font-family="Segoe UI, Arial, sans-serif" font-weight="600" font-size="12" fill="#cbd5e1">Suporte &amp; Infraestrutura de TI • SEE-PB</text>
+</svg>
